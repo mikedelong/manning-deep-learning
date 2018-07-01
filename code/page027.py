@@ -1,7 +1,7 @@
 import logging
 import time
 
-from keras.dataset import mnist
+from keras.datasets import mnist
 
 if __name__ == '__main__':
     start_time = time.time()
