@@ -1,6 +1,8 @@
 import logging
 import time
 
+from keras.dataset import mnist
+
 if __name__ == '__main__':
     start_time = time.time()
 
@@ -12,6 +14,8 @@ if __name__ == '__main__':
     logger.addHandler(console_handler)
     console_handler.setLevel(logging.DEBUG)
     logger.debug('started')
+
+    (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
 
     logger.debug('done')
     finish_time = time.time()
