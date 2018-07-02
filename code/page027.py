@@ -16,6 +16,11 @@ if __name__ == '__main__':
     logger.debug('started')
 
     (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+    logger.debug('the training data has shape %d x %d x %d' % train_images.shape)
+    logger.debug('the training labels look like this: %s' % train_labels)
+    logger.debug('the test data has shape %d x %d x %d' % test_images.shape)
+    logger.debug('the test labels look like this: %s' % test_labels)
+
 
     logger.debug('done')
     finish_time = time.time()
