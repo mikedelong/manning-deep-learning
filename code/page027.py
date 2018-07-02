@@ -35,6 +35,8 @@ if __name__ == '__main__':
     train_labels = to_categorical(train_labels)
     test_labels = to_categorical(test_labels)
 
+    network.fit(train_images, train_labels, epochs=5, batch_size=128)
+
     logger.debug('done')
     finish_time = time.time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
