@@ -36,6 +36,8 @@ if __name__ == '__main__':
     test_labels = to_categorical(test_labels)
 
     network.fit(train_images, train_labels, epochs=5, batch_size=128)
+    test_loss, test_accuracy = network.evaluate(test_images, test_labels)
+    logger.debug('test accuracy: %.4f' % test_accuracy)
 
     logger.debug('done')
     finish_time = time.time()
