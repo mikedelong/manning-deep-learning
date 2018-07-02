@@ -26,6 +26,7 @@ if __name__ == '__main__':
     network = models.Sequential()
     network.add(layers.Dense(512, activation='relu', input_shape=(28 * 28,)))
     network.add(layers.Dense(10, activation='softmax'))
+    network.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
 
     logger.debug('done')
     finish_time = time.time()
