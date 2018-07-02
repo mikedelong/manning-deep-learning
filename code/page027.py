@@ -1,6 +1,8 @@
 import logging
 import time
 
+from keras import layers
+from keras import models
 from keras.datasets import mnist
 
 if __name__ == '__main__':
@@ -21,6 +23,9 @@ if __name__ == '__main__':
     logger.debug('the test data has shape %d x %d x %d' % test_images.shape)
     logger.debug('the test labels look like this: %s' % test_labels)
 
+    network = models.Sequential()
+    network.add(layers.Dense(512, activation='relu', input_shape=(28 * 28,)))
+    network.add(layers.Dense(10, activation='softmax'))
 
     logger.debug('done')
     finish_time = time.time()
