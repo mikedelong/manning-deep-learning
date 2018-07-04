@@ -1,6 +1,7 @@
 import logging
 import time
 
+import matplotlib.pyplot as plt
 from keras import layers
 from keras import models
 from keras.datasets import mnist
@@ -17,6 +18,13 @@ if __name__ == '__main__':
     logger.addHandler(console_handler)
     console_handler.setLevel(logging.DEBUG)
     logger.debug('started')
+
+    output_folder = '../output/'
+
+    output_folder_exists = os.path.isdir(output_folder)
+    if not output_folder_exists:
+        logger.warning('output folder %s does not exist. Quitting.' % output_folder)
+        quit()
 
     (train_images, train_labels), (test_images, test_labels) = mnist.load_data()
     logger.debug('the training data has shape %d x %d x %d' % train_images.shape)
@@ -38,6 +46,10 @@ if __name__ == '__main__':
     network.fit(train_images, train_labels, epochs=5, batch_size=128, verbose=0)
     test_loss, test_accuracy = network.evaluate(test_images, test_labels, verbose=0)
     logger.debug('test accuracy: %.4f' % test_accuracy)
+
+    digit = train_images[4]
+    plt.imshow(digit, cmap=plt.cm.binary)
+    plt.savefig('../output/page027-4th-digit.png')
 
     logger.debug('done')
     finish_time = time.time()
