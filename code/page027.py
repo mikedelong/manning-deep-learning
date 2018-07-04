@@ -1,5 +1,6 @@
 import logging
 import time
+from os.path import isdir
 
 import matplotlib.pyplot as plt
 from keras import layers
@@ -21,7 +22,7 @@ if __name__ == '__main__':
 
     output_folder = '../output/'
 
-    output_folder_exists = os.path.isdir(output_folder)
+    output_folder_exists = isdir(output_folder)
     if not output_folder_exists:
         logger.warning('output folder %s does not exist. Quitting.' % output_folder)
         quit()
@@ -43,13 +44,19 @@ if __name__ == '__main__':
     train_labels = to_categorical(train_labels)
     test_labels = to_categorical(test_labels)
 
+    digit = train_images[4].reshape((28, 28))
+    logger.debug(digit.shape)
+    plt.imshow(digit, cmap=plt.cm.binary)
+    plt.savefig(output_folder + 'page027-4th-digit.png')
+
     network.fit(train_images, train_labels, epochs=5, batch_size=128, verbose=0)
     test_loss, test_accuracy = network.evaluate(test_images, test_labels, verbose=0)
     logger.debug('test accuracy: %.4f' % test_accuracy)
 
-    digit = train_images[4]
+    digit = train_images[4].reshape((28, 28))
+    logger.debug(digit.shape)
     plt.imshow(digit, cmap=plt.cm.binary)
-    plt.savefig('../output/page027-4th-digit.png')
+    plt.savefig(output_folder + 'page027-4th-digit.png')
 
     logger.debug('done')
     finish_time = time.time()
