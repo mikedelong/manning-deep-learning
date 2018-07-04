@@ -45,18 +45,15 @@ if __name__ == '__main__':
     test_labels = to_categorical(test_labels)
 
     digit = train_images[4].reshape((28, 28))
-    logger.debug(digit.shape)
     plt.imshow(digit, cmap=plt.cm.binary)
-    plt.savefig(output_folder + 'page027-4th-digit.png')
+    output_file = output_folder + 'page027-4th-digit.png'
+    logger.debug('writing picture of digit to %s' % output_file)
+    plt.savefig(output_file)
 
     network.fit(train_images, train_labels, epochs=5, batch_size=128, verbose=0)
     test_loss, test_accuracy = network.evaluate(test_images, test_labels, verbose=0)
     logger.debug('test accuracy: %.4f' % test_accuracy)
 
-    digit = train_images[4].reshape((28, 28))
-    logger.debug(digit.shape)
-    plt.imshow(digit, cmap=plt.cm.binary)
-    plt.savefig(output_folder + 'page027-4th-digit.png')
 
     logger.debug('done')
     finish_time = time.time()
