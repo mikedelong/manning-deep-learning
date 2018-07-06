@@ -28,6 +28,8 @@ if __name__ == '__main__':
     logger.debug('loading IMDB data, top %d most frequent words' % num_words)
     (train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=num_words)
 
+    logger.debug('our first item looks like this: %s \nand its label is %s' % (train_data[0], train_labels[0]))
+
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
