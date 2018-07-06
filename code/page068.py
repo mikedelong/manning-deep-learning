@@ -29,6 +29,7 @@ if __name__ == '__main__':
     (train_data, train_labels), (test_data, test_labels) = imdb.load_data(num_words=num_words)
 
     logger.debug('our first item looks like this: %s \nand its label is %s' % (train_data[0], train_labels[0]))
+    logger.debug('the maximum word index is %d' % max([max(sequence) for sequence in train_data]))
 
     logger.debug('done')
     finish_time = time()
