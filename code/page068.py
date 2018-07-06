@@ -30,6 +30,10 @@ if __name__ == '__main__':
 
     logger.debug('our first item looks like this: %s \nand its label is %s' % (train_data[0], train_labels[0]))
     logger.debug('the maximum word index is %d' % max([max(sequence) for sequence in train_data]))
+    word_index = imdb.get_word_index()
+    reverse_word_index = dict([(value, key) for (key, value) in word_index.items()])
+    decoded_review = ' '.join([reverse_word_index.get(index - 3, '?') for index in train_data[0]])
+    logger.debug(decoded_review)
 
     logger.debug('done')
     finish_time = time()
