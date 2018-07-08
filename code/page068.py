@@ -13,6 +13,7 @@ def vectorize_sequences(arg_sequences, arg_dimension=10000):
         result[index, sequence] = 1.0
     return result
 
+
 if __name__ == '__main__':
     start_time = time()
 
