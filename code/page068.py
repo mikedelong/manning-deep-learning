@@ -2,7 +2,16 @@ import logging
 from os.path import isdir
 from time import time
 
+import numpy as np
 from keras.datasets import imdb
+
+
+def vectorize_sequences(arg_sequences, arg_dimension=10000):
+    size = (len(arg_sequences), arg_dimension)
+    result = np.zeros(size)
+    for index, sequence in enumerate(arg_sequences):
+        result[index, sequence] = 1.0
+    return result
 
 if __name__ == '__main__':
     start_time = time()
@@ -34,6 +43,12 @@ if __name__ == '__main__':
     reverse_word_index = dict([(value, key) for (key, value) in word_index.items()])
     decoded_review = ' '.join([reverse_word_index.get(index - 3, '?') for index in train_data[0]])
     logger.debug(decoded_review)
+
+    x_train = vectorize_sequences(train_data)
+    y_train = np.asarray(train_labels).astype('float32')
+    x_test = vectorize_sequences(test_data)
+    y_test = np.asarray(test_labels).astype('float32')
+    logger.debug('sample data: %s' % x_train[0])
 
     logger.debug('done')
     finish_time = time()
