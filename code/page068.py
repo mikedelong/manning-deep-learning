@@ -6,6 +6,7 @@ import numpy as np
 from keras import layers
 from keras.datasets import imdb
 from keras.models import Sequential
+from keras.optimizers import RMSprop
 
 
 def vectorize_sequences(arg_sequences, arg_dimension=10000):
@@ -57,7 +58,16 @@ if __name__ == '__main__':
     model.add(layers.Dense(16, activation='relu', input_shape=(10000,)))
     model.add(layers.Dense(16, activation='relu'))
     model.add(layers.Dense(1, activation='sigmoid'))
-    model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=RMSprop(lr=0.001), loss='binary_crossentropy', metrics=['accuracy'])
+
+    x_val = x_train[:num_words]
+    partial_x_train = x_train[num_words:]
+    y_val = y_train[:num_words]
+    partial_y_train = y_train[num_words:]
+
+    history = model.fit(partial_x_train, partial_y_train, epochs=20, batch_size=512, validation_data=(x_val, y_val),
+                        verbose=verbose)
+    logger.debug('history keys are %s' % history.history.keys())
 
     logger.debug('done')
     finish_time = time()
