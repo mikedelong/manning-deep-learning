@@ -6,6 +6,7 @@ import numpy as np
 from keras import layers
 from keras.datasets import imdb
 from keras.losses import binary_crossentropy
+from keras.metrics import binary_accuracy
 from keras.models import Sequential
 from keras.optimizers import RMSprop
 
@@ -59,7 +60,7 @@ if __name__ == '__main__':
     model.add(layers.Dense(16, activation='relu', input_shape=(10000,)))
     model.add(layers.Dense(16, activation='relu'))
     model.add(layers.Dense(1, activation='sigmoid'))
-    model.compile(optimizer=RMSprop(lr=0.001), loss=binary_crossentropy, metrics=['accuracy'])
+    model.compile(optimizer=RMSprop(lr=0.001), loss=binary_crossentropy, metrics=[binary_accuracy])
 
     x_val = x_train[:num_words]
     partial_x_train = x_train[num_words:]
