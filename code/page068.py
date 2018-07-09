@@ -3,6 +3,8 @@ from os.path import isdir
 from time import time
 
 import numpy as np
+from keras import layers
+from keras import models
 from keras.datasets import imdb
 
 
@@ -50,6 +52,11 @@ if __name__ == '__main__':
     x_test = vectorize_sequences(test_data)
     y_test = np.asarray(test_labels).astype('float32')
     logger.debug('sample data: %s' % x_train[0])
+
+    model = models.Sequential()
+    model.add(layers.Dense(16, activation='relu', input_shape=(10000,)))
+    model.add(layers.Dense(16, activation='relu'))
+    model.add(layers.Dense(1, activation='sigmoid'))
 
     logger.debug('done')
     finish_time = time()
