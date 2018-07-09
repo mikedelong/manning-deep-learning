@@ -4,8 +4,8 @@ from time import time
 
 import numpy as np
 from keras import layers
-from keras import models
 from keras.datasets import imdb
+from keras.models import Sequential
 
 
 def vectorize_sequences(arg_sequences, arg_dimension=10000):
@@ -53,7 +53,7 @@ if __name__ == '__main__':
     y_test = np.asarray(test_labels).astype('float32')
     logger.debug('sample data: %s' % x_train[0])
 
-    model = models.Sequential()
+    model = Sequential()
     model.add(layers.Dense(16, activation='relu', input_shape=(10000,)))
     model.add(layers.Dense(16, activation='relu'))
     model.add(layers.Dense(1, activation='sigmoid'))
