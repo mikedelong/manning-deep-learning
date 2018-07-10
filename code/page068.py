@@ -2,6 +2,7 @@ import logging
 from os.path import isdir
 from time import time
 
+import matplotlib.pyplot as plt
 import numpy as np
 from keras import layers
 from keras.datasets import imdb
@@ -70,6 +71,21 @@ if __name__ == '__main__':
     history = model.fit(partial_x_train, partial_y_train, epochs=20, batch_size=512, validation_data=(x_val, y_val),
                         verbose=verbose)
     logger.debug('history keys are %s' % history.history.keys())
+
+    history_dict = history.history
+    loss_values = history_dict['loss']
+    val_loss_values = history_dict['val_loss']
+    epochs = range(1, len(val_loss_values) + 1)
+    plt.plot(epochs, loss_values, 'bo', label='Training loss')
+    plt.plot(epochs, val_loss_values, 'b', label='Validation loss')
+    plt.title('')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.legend()
+    output_file = 'page068-loss-valloss.png'
+    full_output_file = output_folder + output_file
+    logger.debug('writing loss/val_loss graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
 
     logger.debug('done')
     finish_time = time()
