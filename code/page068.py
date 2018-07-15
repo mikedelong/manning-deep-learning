@@ -87,6 +87,20 @@ if __name__ == '__main__':
     logger.debug('writing loss/val_loss graph to %s' % full_output_file)
     plt.savefig(full_output_file)
 
+    plt.clf()
+    acc_values = history_dict['binary_accuracy']
+    val_acc_values = history_dict['val_binary_accuracy']
+    plt.plot(epochs, acc_values, 'bo', label='Training acc')
+    plt.plot(epochs, val_acc_values, 'b', label='Validation acc')
+    plt.title('')
+    plt.xlabel('Epochs')
+    plt.ylabel('Loss')
+    plt.legend()
+    output_file = 'page068-acc-valacc.png'
+    full_output_file = output_folder + output_file
+    logger.debug('writing acc/val_acc graph to %s' % full_output_file)
+    plt.savefig(full_output_file)
+
     logger.debug('done')
     finish_time = time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
