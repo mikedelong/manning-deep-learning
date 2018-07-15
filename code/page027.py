@@ -54,7 +54,6 @@ if __name__ == '__main__':
     test_loss, test_accuracy = network.evaluate(test_images, test_labels, verbose=0)
     logger.debug('test accuracy: %.4f' % test_accuracy)
 
-
     logger.debug('done')
     finish_time = time.time()
     elapsed_hours, elapsed_remainder = divmod(finish_time - start_time, 3600)
