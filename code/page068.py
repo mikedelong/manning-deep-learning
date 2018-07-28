@@ -69,7 +69,7 @@ if __name__ == '__main__':
     partial_y_train = y_train[num_words:]
 
     history = model0.fit(partial_x_train, partial_y_train, epochs=20, batch_size=512, validation_data=(x_val, y_val),
-                        verbose=verbose)
+                         verbose=verbose)
     logger.debug('history keys are %s' % history.history.keys())
 
     history_dict = history.history
@@ -108,7 +108,7 @@ if __name__ == '__main__':
     model1.compile(optimizer=RMSprop(lr=0.001), loss=binary_crossentropy, metrics=[binary_accuracy])
     model1.fit(x_train, y_train, epochs=4, batch_size=512, verbose=verbose)
     results = model1.evaluate(x_test, y_test, verbose=verbose)
-    logger.debug(results)
+    logger.debug('results: %s' % results)
 
     logger.debug('done')
     finish_time = time()
