@@ -57,18 +57,18 @@ if __name__ == '__main__':
     y_test = np.asarray(test_labels).astype('float32')
     logger.debug('sample data: %s' % x_train[0])
 
-    model = Sequential()
-    model.add(layers.Dense(16, activation='relu', input_shape=(10000,)))
-    model.add(layers.Dense(16, activation='relu'))
-    model.add(layers.Dense(1, activation='sigmoid'))
-    model.compile(optimizer=RMSprop(lr=0.001), loss=binary_crossentropy, metrics=[binary_accuracy])
+    model0 = Sequential()
+    model0.add(layers.Dense(16, activation='relu', input_shape=(10000,)))
+    model0.add(layers.Dense(16, activation='relu'))
+    model0.add(layers.Dense(1, activation='sigmoid'))
+    model0.compile(optimizer=RMSprop(lr=0.001), loss=binary_crossentropy, metrics=[binary_accuracy])
 
     x_val = x_train[:num_words]
     partial_x_train = x_train[num_words:]
     y_val = y_train[:num_words]
     partial_y_train = y_train[num_words:]
 
-    history = model.fit(partial_x_train, partial_y_train, epochs=20, batch_size=512, validation_data=(x_val, y_val),
+    history = model0.fit(partial_x_train, partial_y_train, epochs=20, batch_size=512, validation_data=(x_val, y_val),
                         verbose=verbose)
     logger.debug('history keys are %s' % history.history.keys())
 
@@ -100,6 +100,15 @@ if __name__ == '__main__':
     full_output_file = output_folder + output_file
     logger.debug('writing acc/val_acc graph to %s' % full_output_file)
     plt.savefig(full_output_file)
+
+    model1 = models.Sequential()
+    model1.add(layers.Dense(16, activation='relu', input_shape=(10000,)))
+    model1.add(layers.Dense(16, activation='relu'))
+    model1.add(layers.Dense(1, activation='sigmoid'))
+    model1.compile(optimizer=RMSprop(lr=0.001), loss=binary_crossentropy, metrics=[binary_accuracy])
+    model1.fit(x_train, y_train, epochs=4, batch_size=512)
+    results = model1.evaluate(x_test, y_test)
+    logger.debug(results)
 
     logger.debug('done')
     finish_time = time()
