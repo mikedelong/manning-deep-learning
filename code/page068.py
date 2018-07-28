@@ -101,7 +101,7 @@ if __name__ == '__main__':
     logger.debug('writing acc/val_acc graph to %s' % full_output_file)
     plt.savefig(full_output_file)
 
-    model1 = models.Sequential()
+    model1 = Sequential()
     model1.add(layers.Dense(16, activation='relu', input_shape=(10000,)))
     model1.add(layers.Dense(16, activation='relu'))
     model1.add(layers.Dense(1, activation='sigmoid'))
