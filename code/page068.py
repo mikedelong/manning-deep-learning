@@ -106,8 +106,8 @@ if __name__ == '__main__':
     model1.add(layers.Dense(16, activation='relu'))
     model1.add(layers.Dense(1, activation='sigmoid'))
     model1.compile(optimizer=RMSprop(lr=0.001), loss=binary_crossentropy, metrics=[binary_accuracy])
-    model1.fit(x_train, y_train, epochs=4, batch_size=512)
-    results = model1.evaluate(x_test, y_test)
+    model1.fit(x_train, y_train, epochs=4, batch_size=512, verbose=verbose)
+    results = model1.evaluate(x_test, y_test, verbose=verbose)
     logger.debug(results)
 
     logger.debug('done')
