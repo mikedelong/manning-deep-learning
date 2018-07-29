@@ -107,8 +107,11 @@ if __name__ == '__main__':
     model1.add(layers.Dense(1, activation='sigmoid'))
     model1.compile(optimizer=RMSprop(lr=0.001), loss=binary_crossentropy, metrics=[binary_accuracy])
     model1.fit(x_train, y_train, epochs=4, batch_size=512, verbose=verbose)
-    results = model1.evaluate(x_test, y_test, verbose=verbose)
-    logger.debug('results: %s' % results)
+    evaluate_results = model1.evaluate(x_test, y_test, verbose=verbose)
+    logger.debug('evaluation results: %s' % evaluate_results)
+
+    predictions = model1.predict(x_test)
+    logger.debug(predictions)
 
     logger.debug('done')
     finish_time = time()
